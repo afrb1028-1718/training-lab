@@ -1,0 +1,308 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>TRAINING LAB v0.13</title>
+<meta name="theme-color" content="#111c2b"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="TRAINING LAB"><meta name="mobile-web-app-capable" content="yes"><meta name="description" content="TRAINING LAB トレーニング記録"><link rel="manifest" href="./manifest.webmanifest"><link rel="apple-touch-icon" href="./icon-180.png"><link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png"><style>
+:root{font-family:system-ui,-apple-system,sans-serif;color:#edf3fc;background:#0d1420}*{box-sizing:border-box}body{margin:0}header{background:#111c2b;padding:14px 15px;border-bottom:1px solid #344257;position:sticky;top:0;z-index:2}h1{font-size:19px;margin:0 0 10px}.wrap{max-width:650px;margin:auto;padding:12px 12px 70px}button,input,select,textarea{font:inherit}button{border:1px solid #425570;background:#26364d;color:white;border-radius:10px;padding:11px;cursor:pointer}button.primary,.active{background:#227fca;border-color:#227fca}button:disabled{opacity:.5}.tabs,.actions{display:flex;gap:7px;flex-wrap:wrap}.tabs button{flex:1}.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.hint,.muted{color:#a5b4c7;font-size:12px}.group{color:#a5b4c7;font-weight:700;margin:17px 0 7px}.panel{border:1px solid #35465d;border-radius:15px;background:#182437;margin:10px 0;overflow:hidden}.panelhead{width:100%;border:0;background:transparent;text-align:left;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:15px}.panelhead strong{font-size:16px}.volume{text-align:right;font-size:14px;color:#a9dcff;white-space:nowrap}.inner{padding:12px;border-top:1px solid #344257}.set{display:grid;grid-template-columns:22px minmax(0,1fr) 16px 68px 38px;align-items:center;gap:7px;margin:8px 0}.set input{width:100%;min-width:0;padding:12px 5px;border-radius:9px;background:#101a2a;border:1px solid #53667f;color:white;text-align:center}.sethead{font-size:11px;color:#a5b4c7}.wide{width:100%}.primary{background:#227fca}.status{font-size:12px;color:#9cddbb;margin:9px 0}.note{font-size:12px;color:#b3c1d2}.reset{background:transparent;border:1px solid #6b5260;color:#ffc2c2}input[type=date],select{background:#26364d;color:white;border:1px solid #52647e;border-radius:9px;padding:9px}textarea{width:100%;background:#101a2a;color:white;border:1px solid #52647e;border-radius:9px;padding:9px;min-height:55px}details{margin:14px 0}summary{padding:12px;cursor:pointer}.rpe{padding:14px}.rpe select{min-width:125px}.explain{font-size:12px;color:#c6d3e3;flex:1}.warn{color:#ffd08a}.ok{color:#8ce2b5}.dayend{border:1px solid #425570;border-radius:14px;background:#1b2a40;margin-top:18px}.dayend button{margin-top:10px}.badge{font-size:11px;color:#c6d3e3}.smallbtn{font-size:12px;padding:7px 10px}.set input[type=checkbox]{width:23px;height:23px;accent-color:#258bd5}.rpebtn{width:100%;display:flex;justify-content:space-between;align-items:center;text-align:left;padding:11px 13px}.rpeoptions{border:1px solid #53667f;border-radius:10px;margin-top:6px;max-height:260px;overflow:auto}.rpeoption{width:100%;border:0;border-radius:0;border-bottom:1px solid #3b4c65;display:flex;justify-content:space-between;text-align:left}.rpeoption.selected{background:#24527d}.rpeoption span:last-child{color:#bcd0e7;font-size:12px}.adminfield{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:9px 0}.adminfield input,.adminfield select,#addName,#adminForm input,#adminForm textarea{width:100%;padding:9px;border-radius:8px;background:#101a2a;color:white;border:1px solid #52647e}.panelhead>div:first-child{min-width:0;flex:1}.panelhead .volume{min-width:122px}.panelhead .hint{font-size:11px}.rpeinfo{font-size:12px;color:#c6d3e3;margin-top:6px}
+
+#admin,#admin .inner,#adminForm{min-width:0;max-width:100%}
+#adminItem{display:block;width:100%;max-width:100%;min-width:0;box-sizing:border-box;overflow:hidden;text-overflow:ellipsis}
+#admin label{min-width:0;display:block}
+#admin input,#admin select,#admin textarea{max-width:100%;box-sizing:border-box}
+.admin-sets{display:flex;flex-direction:column;gap:9px;margin:10px 0}
+.admin-set{border:1px solid #43536a;border-radius:10px;padding:9px;min-width:0}
+.admin-set-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.admin-set-grid label{font-size:11px;color:#b6c6d9}
+.admin-set-grid input{width:100%;min-width:0;padding:9px 3px;text-align:center}
+.admin-set .set-number{font-size:12px;font-weight:700;margin-bottom:7px}
+@media(max-width:370px){.admin-set-grid{gap:3px}.admin-set-grid input{font-size:14px;padding:8px 1px}}
+.shareline{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #35465d}.shareline input{width:20px;height:20px}.historyrow{padding:10px 0;border-bottom:1px solid #35465d}.headeractions{flex-wrap:nowrap}header .actions{gap:5px}header .smallbtn{padding:7px 9px;font-size:12px}@media(max-width:390px){header h1{font-size:16px}header .smallbtn{font-size:11px;padding:7px}} 
+header{padding:9px 12px 10px}.topline{display:flex;align-items:center;justify-content:space-between;gap:6px;min-width:0}.topline h1{font-size:clamp(15px,4.5vw,20px);margin:0;white-space:nowrap;min-width:0;letter-spacing:-.5px}.headbuttons{display:flex;flex-wrap:nowrap;gap:5px;flex-shrink:0}.headbuttons button{white-space:nowrap;padding:7px 9px;font-size:12px}.datebar{display:flex;align-items:center;justify-content:space-between;gap:6px;margin:7px 0}.datebar label{white-space:nowrap;color:#a5b4c7;font-size:12px}.datebar input{max-width:155px;font-size:14px;padding:7px}.datebar .hint{font-size:11px;white-space:nowrap}.headtabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;flex-wrap:nowrap}.headtabs button{min-width:0;padding:9px 1px;font-size:14px;white-space:nowrap}.memoarea{margin:9px 0}.memoarea textarea{min-height:55px}.wrap{padding-top:5px}#adminItem{max-width:100%;width:100%;min-width:0}
+@media(max-width:360px){.topline h1{font-size:14px}.headbuttons button{font-size:11px;padding:6px}.datebar input{max-width:140px}}
+
+.date-trigger{min-width:145px;text-align:center;padding:8px 10px;white-space:nowrap}
+.modal-overlay[hidden]{display:none!important}.modal-overlay{position:fixed;inset:0;background:#020713c9;z-index:100;display:flex;align-items:center;justify-content:center;padding:12px}
+.modal-box{width:min(100%,430px);max-height:calc(100dvh - 24px);overflow:auto;border:1px solid #4c6684;background:#18263b;border-radius:16px;padding:12px;box-shadow:0 20px 60px #0008}
+.modal-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}.modal-title strong{font-size:16px}
+.calendar-nav{display:flex;justify-content:space-between;align-items:center;margin:5px 0 10px}.calendar-nav button{font-size:23px;padding:4px 15px}.calendar-weekdays,.calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;text-align:center}.calendar-weekdays{font-size:12px;color:#b5c8de;margin-bottom:5px}.calendar-weekdays span:first-child{color:#ffa6a6}.calendar-weekdays span:last-child{color:#a2c7ff}.calendar-grid button{min-width:0;padding:0;aspect-ratio:1;border-radius:9px;font-size:14px}.calendar-grid .empty{visibility:hidden}.calendar-grid button.current{border-color:#57c3fc;background:#19578a}.calendar-grid button.today{outline:1px solid #89b6cf}.calendar-box #calendarToday{margin-top:10px}
+.rpe-modal-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.rpe-modal-grid button{min-height:59px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;text-align:left;padding:7px 9px;gap:2px}.rpe-modal-grid b{font-size:16px}.rpe-modal-grid span{font-size:11px;color:#c2d0e0}.rpe-modal-grid button.selected{background:#1c669b;border-color:#7fcaff}
+@media(max-height:590px){.rpe-modal-grid button{min-height:42px;padding:4px 7px}.rpe-modal-grid b{font-size:13px}.rpe-modal-grid span{font-size:10px}}
+
+/* v0.13: RPE options in one vertical column, compact enough for a phone screen. */
+.rpe-box{width:min(100%,390px);padding:10px 12px;overflow:hidden}
+.rpe-box .modal-title{margin-bottom:7px}
+.rpe-modal-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:4px}
+.rpe-modal-grid button{min-height:0;height:clamp(35px,5.4dvh,45px);display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:12px;text-align:left;padding:4px 12px}
+.rpe-modal-grid b{font-size:14px;flex:0 0 64px}
+.rpe-modal-grid span{font-size:12px;line-height:1.2}
+@media(max-height:560px){.rpe-box{max-height:calc(100dvh - 12px);overflow:auto}.rpe-modal-grid{gap:2px}.rpe-modal-grid button{height:34px;padding:3px 8px}}
+
+/* v0.13: Header scrolls with document; sharing is not an exercise card. */
+header{position:static;top:auto;z-index:auto}
+#shareSection{border:0;background:transparent;border-radius:0;margin:24px 0 18px;padding:0 2px;overflow:visible}
+#shareSection h3{font-size:14px;font-weight:650;color:#b3c4d8;margin:0 0 7px}
+#shareSection .shareline{padding:7px 0;border-bottom:1px solid #28384b;font-size:13px}
+#shareSection .shareline input{width:18px;height:18px;accent-color:#258bd5}
+#shareSection .actions{margin-top:10px;gap:8px}
+#shareSection .actions button{padding:9px 12px;font-size:13px}
+</style></head><body>
+<header><div class="topline"><h1>💪 TRAINING LAB</h1><div class="headbuttons"><button id="historyToggle" class="smallbtn">履歴</button><button id="adminToggle" class="smallbtn">設定</button></div></div><div class="datebar"><label>実施日 <button id="dateOpen" type="button" class="date-trigger"></button></label><span id="saveStatus" class="hint">保存確認中</span></div><div class="tabs headtabs" id="days"></div></header>
+<div id="calendarOverlay" class="modal-overlay" hidden><div class="modal-box calendar-box" role="dialog" aria-modal="true" aria-label="実施日を選択"><div class="modal-title"><strong>実施日を選択</strong><button id="calendarClose" class="smallbtn" type="button">×</button></div><div class="calendar-nav"><button id="calendarPrev" type="button">‹</button><strong id="calendarMonth"></strong><button id="calendarNext" type="button">›</button></div><div class="calendar-weekdays"><span>日</span><span>月</span><span>火</span><span>水</span><span>木</span><span>金</span><span>土</span></div><div id="calendarGrid" class="calendar-grid"></div><button id="calendarToday" type="button" class="wide">今日</button></div></div><div id="rpeOverlay" class="modal-overlay" hidden><div class="modal-box rpe-box" role="dialog" aria-modal="true" aria-label="RPEを選択"><div class="modal-title"><strong>RPEを選択</strong><button id="rpeClose" class="smallbtn" type="button">×</button></div><div id="rpeModalGrid" class="rpe-modal-grid"></div></div></div><main class="wrap"><div id="content"></div><section id="historyPanel" class="panel" hidden><div class="inner"><h2>種目別の履歴一覧</h2><select id="historyItem"></select><div id="historyDetail"></div></div></section><section id="shareSection" aria-label="今日の記録を共有"><h3>今日の記録を共有</h3><div id="shareItems"></div><div class="actions"><button class="primary" id="shareNow">共有する</button><button id="copyShare">文章をコピー</button></div></section><section id="admin" class="panel" hidden><div class="inner"><h2>管理設定</h2><p class="hint">種目・セット・進行条件・次回開始重量を編集します。過去履歴は変更しません。</p><label>編集する種目 <select id="adminItem"></select></label><div id="adminForm"></div><hr><h3>種目を追加</h3><div class="row"><select id="addDay"><option value="1">Day1</option><option value="2">Day2</option><option value="3">Day3</option><option value="4">Day4</option></select><select id="addGroup"><option>AM</option><option>PM</option></select></div><input id="addName" placeholder="新しい種目名" style="width:100%;margin:8px 0"><button id="addItem" class="primary wide">種目を追加</button><p class="hint">管理者認証・クラウド同期は未実装です。</p></div></section>
+
+<details class="panel"><summary>履歴・バックアップ</summary><div class="inner"><div class="actions"><button id="export">JSONを書き出す</button><button id="importBtn">バックアップを読み込む</button><input type="file" id="import" accept="application/json" hidden></div><div id="history" class="hint"></div></div></details></main>
+<script>
+'use strict';
+let catalog=[{day:1,groups:[{name:'AM',items:[['crunch','ケーブルクランチ',[[112.5,9],[112.5,9],[112.5,9]],8,15,'list',[112.5,118.5,124.5]] ,['curl','ダンベルカール',[[10,14],[10,14],[10,14]],8,15,'list',[10,11,12,14,16]] ]},{name:'PM',items:[['belt','ベルトスクワット',[[175,9],[175,9],[175,9],[150,15]],8,10,'belt',[]]]}]},{day:2,groups:[{name:'AM',items:[['row','ローロウ',[[81,9],[81,9],[81,9]],5,15,'list',[76.5,81,85.5,90]] ]},{name:'PM',items:[['pullover','ダンベルプルオーバー',[[28,9],[28,9],[28,9]],8,15,'list',[24,26,28,30,32]],['benchA','ベンチプレス（アセンディング）',[[67.5,14],[75,11],[80,9],[87.5,5]],0,0,'bench',[]]]}]},{day:3,groups:[{name:'AM',items:[['french','フレンチプレス',[[32.5,5],[32.5,5],[32.5,5]],5,15,'step',1]]},{name:'PM',items:[['rdl','ルーマニアンデッドリフト',[[92.5,7],[92.5,7],[92.5,7]],5,10,'step',2.5]]}]},{day:4,groups:[{name:'AM',items:[['lat','ラットプルダウン',[[70,10],[70,10],[70,10]],5,15,'list',[67.5,70,74.5,79]] ]},{name:'PM',items:[['benchV','ベンチプレス（10×10）',Array.from({length:10},()=>[69.5,10]),10,10,'manual',[]]]}]}];
+const KEY='training_lab_v12_data';
+const clone=x=>JSON.parse(JSON.stringify(x));
+const today=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
+const now=()=>new Date().toISOString();
+const fmt=x=>Number(x).toLocaleString('ja-JP',{maximumFractionDigits:2});
+const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const descriptions=['非常に軽い','かなり軽い','軽い','余裕が大きい','余裕がある','ややきつい','きついが余裕あり','あと約2回できそう','あと約1回できそう','限界・これ以上できない'];
+const allItems=()=>catalog.flatMap(d=>d.groups.flatMap(g=>g.items));
+const template=id=>allItems().find(i=>i[0]===id);
+let state=null;
+try{state=JSON.parse(localStorage.getItem(KEY))}catch(e){}
+if(!state || !state.plans || !state.logs)state={plans:{},logs:{},history:[],rpe:{}};
+if(!Array.isArray(state.history))state.history=[];
+if(!state.rpe)state.rpe={};
+if(Array.isArray(state.catalog))catalog=state.catalog;
+let day=1,expanded='',date=today(),adminOpen=false,nextView={};
+refreshDateButton();
+let rpeOpen='';
+function plan(id){if(!state.plans[id])state.plans[id]=clone(template(id)[2]);return state.plans[id]}
+function key(id){return `${date}|${id}`}
+function log(id){
+ const k=key(id),current=plan(id);
+ if(!state.logs[k])state.logs[k]={sets:current.map(([w,r])=>({w,r,done:false})),finalized:false,notes:'',rpe:null};
+ const l=state.logs[k];
+ // An untouched draft is a view of the current formal prescription, not a frozen copy.
+ // Never replace actual input, completed records or user-entered notes/RPE.
+ if(!l.finalized && !l.touched && !l.sets.some(x=>x.done) && !l.notes && l.rpe==null){
+   const old=l.sets.map(x=>[Number(x.w),Number(x.r)]);
+   const changed=old.length!==current.length||old.some((r,i)=>r[0]!==Number(current[i][0])||r[1]!==Number(current[i][1]));
+   if(changed)l.sets=current.map(([w,r])=>({w,r,done:false}));
+ }
+ return l;
+}
+function volume(s){return s.reduce((n,x)=>n+Number(x.w)*Number(x.r),0)}
+function save(){try{state.catalog=catalog;localStorage.setItem(KEY,JSON.stringify(state));document.getElementById('saveStatus').textContent='保存済み';return true}catch(e){document.getElementById('saveStatus').textContent='保存失敗';alert('保存できません。画面を閉じずバックアップを確認してください。');return false}}
+function target(item){const mode=item[5];if(mode==='bench')return item[7]||[15,12,10,5];if(mode==='belt')return item[7]||[10,10,10,15];return item[7]||item[2].map(()=>item[4])}
+function propose(item,l,previous){
+ const mode=item[5], goals=target(item);
+ if(mode==='manual')return null;
+ if(l.sets.length!==previous.length || !l.sets.every((s,i)=>s.done && Number(s.w)===Number(previous[i][0]) && Number(s.r)>=Number(previous[i][1])))return null;
+ const allGoals=l.sets.every((s,i)=>Number(s.r)>=Number(goals[i]));
+ if(!allGoals){
+  // Every prescribed set must succeed; progress all sets together by one rep, capped at each goal.
+  if(mode==='belt'){
+   const mainDone=l.sets.slice(0,3).every((s,i)=>Number(s.r)>=Number(goals[i]));
+   if(mainDone)return previous.map(([w,r],i)=>[w,i<3?Math.min(r+1,goals[i]):r]);
+  }
+  return previous.map(([w,r],i)=>[w,Math.min(r+1,Number(goals[i]))]);
+ }
+ if(mode==='bench')return previous.map(([w],i)=>[w+(Number(item[10]??item[6])||2.5),(item[8]||[10,7,5,1])[i]??1]);
+ if(mode==='belt')return previous.map(([w],i)=>[w+(Number(item[10]??item[6])||2.5),(item[8]||[8,8,8,15])[i]??8]);
+ const options=mode==='list'?(item[9]||item[6]):(item[10]??item[6]), next=mode==='list'?(Array.isArray(options)?options.find(w=>Number(w)>Number(previous[0][0])):null):Number(previous[0][0])+Number(options);
+ return next==null||!Number.isFinite(Number(next))?null:previous.map((_,i)=>[Number(next),(item[8]||[])[i]??item[3]]);
+}
+function latest(id){return state.history.filter(h=>h.id===id).sort((a,b)=>String(b.finishedAt||'').localeCompare(String(a.finishedAt||'')))[0]}
+function shortStamp(iso){if(!iso)return '未記録';const d=new Date(iso);return Number.isNaN(d.getTime())?'未記録':`${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()}（${'日月火水木金土'[d.getDay()]}）`}
+function stamp(iso){if(!iso)return 'なし';const d=new Date(iso);return Number.isNaN(d.getTime())?'不明':d.toLocaleString('ja-JP',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'})}
+function render(){
+ document.getElementById('days').innerHTML=catalog.map(d=>`<button class="${day===d.day?'active':''}" data-day="${d.day}">Day${d.day}</button>`).join('');
+ const d=catalog.find(x=>x.day===day);
+ document.getElementById('content').innerHTML=d.groups.map(g=>`<div class="group">${g.name}</div>`+g.items.map(item=>{
+ const [id,name]=item,p=plan(id),l=log(id),open=expanded===id,prev=latest(id);
+ const planned=volume(p.map(([w,r])=>({w,r})));const showNext=!!nextView[id] && !!l.finalized;
+ return `<section class="panel"><button class="panelhead" data-open="${id}"><div><strong>${esc(name)}</strong><div class="hint">実施：${esc(shortStamp(prev?.finishedAt))}</div></div><div class="volume"><div class="hint">予定総ボリューム</div>${fmt(planned)}kg ${open?'▴':'▾'}</div></div></button>${open?`<div class="inner">${showNext&&l.finalized?`<div class="status">次回の正式メニュー</div>`:""}<div class="sethead">セット　重量(kg) × 回数　実施</div>${(showNext&&l.finalized?plan(id).map(([w,r])=>({w,r,done:false})):l.sets).map((s,i)=>`<div class="set"><span>${i+1}</span><input type="number" min="0" step="any" value="${esc(s.w)}" data-edit="${id}" data-index="${i}" data-field="w" ${l.finalized?'disabled':''}><span>×</span><input type="number" min="0" step="1" value="${esc(s.r)}" data-edit="${id}" data-index="${i}" data-field="r" ${l.finalized?'disabled':''}><input type="checkbox" aria-label="${i+1}セット実施" data-check="${id}" data-index="${i}" ${s.done?'checked':''} ${l.finalized?'disabled':''} ${showNext?'hidden':''}></div>`).join('')}
+ ${showNext&&l.finalized?`<p class="hint">正式な次回予定を表示中です。</p>`:`<div class="row"><span class="hint">実施済み ${l.sets.filter(s=>s.done).length}/${l.sets.length}セット</span><strong>${fmt(volume(l.sets.filter(s=>s.done)))}kg</strong></div>`}
+ <div style="margin:14px 0"><strong>この種目のRPE（必須）</strong><button class="rpebtn" data-rpe-toggle="${id}" ${l.finalized?'disabled':''}><span>${l.rpe?'RPE '+l.rpe+'｜'+descriptions[l.rpe-1]:'RPEを選択'}</span><span>▾</span></button></div>
+ 
+ <div class="memoarea"><label class="hint">自由メモ（任意）</label><textarea data-memo="${id}" ${l.finalized?'disabled':''} placeholder="自由入力">${esc(l.notes||'')}</textarea></div>
+ <div class="actions">${l.finalized?(showNext?`<button class="wide" data-next="${id}">今回の実績を表示</button>`:`<button class="reset" data-reset="${id}">取り消し</button><button class="primary" data-next="${id}">次回メニューを表示</button>`):`<button class="primary wide" data-complete="${id}">この種目を終了</button>`}</div>
+ </div>`:''}</section>`}).join('')).join('');
+ renderHistory();renderShare();if(historyVisible)renderHistoryPanel();
+}
+function complete(id){
+ const l=log(id);if(l.finalized)return;
+ if(!Number.isInteger(Number(l.rpe))||Number(l.rpe)<1||Number(l.rpe)>10){alert('この種目のRPE 1〜10を選択してください。');return}
+ if(l.sets.some(s=>!Number.isFinite(Number(s.w))||Number(s.w)<0||!Number.isInteger(Number(s.r))||Number(s.r)<0)){alert('重量・回数を確認してください');return}
+ const prev=clone(plan(id)),next=propose(template(id),l,prev),finishedAt=now();
+ l.finalized=true;l.finishedAt=finishedAt;nextView[id]=false;l.snapshot=prev;l.next=next?clone(next):null;l.advanced=!!next;
+ if(next)state.plans[id]=clone(next);
+ const entry={key:key(id),date,id,name:template(id)?.[1],sets:clone(l.sets),rpe:l.rpe,notes:l.notes||'',snapshot:prev,next:next?clone(next):null,finishedAt};
+ state.history.push(entry);
+ if(!save()){state.history.pop();state.plans[id]=prev;l.finalized=false;delete l.finishedAt;return}
+ render();
+}
+function reset(id){
+ const l=log(id);
+ if(!l.finalized){if(!confirm('この種目の入力を予定値に戻しますか？'))return;l.sets=plan(id).map(([w,r])=>({w,r,done:false}));l.rpe=null;save();render();return}
+ const later=state.history.filter(h=>h.id===id && h.key!==key(id) && String(h.finishedAt)>String(l.finishedAt));
+ if(later.length){alert('この種目には後続の完遂記録があります。次回予定を壊さないため、ここではリセットできません。');return}
+ if(!confirm('この完遂を取り消し、次回メニューも元に戻しますか？'))return;
+ const old=clone(l.snapshot||plan(id));
+ state.plans[id]=old;
+ state.history=state.history.filter(h=>h.key!==key(id));
+ state.logs[key(id)]={sets:clone(l.sets),finalized:false,notes:l.notes||'',rpe:l.rpe,touched:true};
+ nextView[id]=false;save();render();
+}
+
+let historyVisible=false;
+const shareSelected={};
+function historyLabel(id){return template(id)?.[1]||state.history.find(x=>x.id===id)?.name||id}
+function renderHistoryPanel(){
+ const ids=[...new Set(state.history.map(x=>x.id))];
+ const sel=document.getElementById('historyItem'),old=sel.value;
+ sel.innerHTML=ids.length?ids.map(id=>`<option value="${esc(id)}">${esc(historyLabel(id))}</option>`).join(''):'<option value="">履歴なし</option>';
+ if(ids.includes(old))sel.value=old;
+ const rows=state.history.filter(h=>h.id===sel.value).sort((a,b)=>String(b.finishedAt).localeCompare(String(a.finishedAt)));
+ document.getElementById('historyDetail').innerHTML=rows.length?rows.map(h=>`<div class="historyrow"><strong>${esc(h.date||shortStamp(h.finishedAt))}</strong>　RPE ${esc(h.rpe??'未記録')}<div class="hint">${h.sets.filter(x=>x.done).map(x=>`${fmt(x.w)}kg×${x.r}回`).join(' / ')||'実施チェックなし'}</div><div class="hint">実績総ボリューム ${fmt(volume(h.sets.filter(x=>x.done)))}kg</div></div>`).join(''):'まだ履歴がありません。';
+}
+function renderShare(){
+ const rows=state.history.filter(h=>h.date===date);
+ document.getElementById('shareItems').innerHTML=rows.length?rows.map(h=>`<label class="shareline"><input type="checkbox" data-share="${esc(h.id)}" ${shareSelected[date+'|'+h.id]?'checked':''}><span>${esc(historyLabel(h.id))}<span class="hint"> / ${fmt(volume(h.sets.filter(x=>x.done)))}kg</span></span></label>`).join(''):'この日の終了済み種目はありません。';
+}
+function shareText(){
+ const rows=state.history.filter(h=>h.date===date&&shareSelected[date+'|'+h.id]);
+ if(!rows.length)return '';
+ return `【TRAINING LAB｜${date}】\n\n`+rows.map(h=>`${historyLabel(h.id)}\n${h.sets.filter(x=>x.done).map(x=>`${fmt(x.w)}kg × ${x.r}回`).join('\n')||'実施セットなし'}\nRPE：${h.rpe??'未記録'}${h.notes?'\nメモ：'+h.notes:''}\n総ボリューム：${fmt(volume(h.sets.filter(x=>x.done)))}kg`).join('\n\n');
+}
+document.getElementById('historyToggle').onclick=()=>{
+ historyVisible=!historyVisible;
+ document.getElementById('historyPanel').hidden=!historyVisible;
+ if(historyVisible){renderHistoryPanel();document.getElementById('historyPanel').scrollIntoView({behavior:'smooth',block:'start'})}
+};
+document.getElementById('historyItem').onchange=renderHistoryPanel;
+document.getElementById('shareItems').onchange=e=>{if(e.target.dataset.share)shareSelected[date+'|'+e.target.dataset.share]=e.target.checked};
+document.getElementById('copyShare').onclick=async()=>{
+ const t=shareText();if(!t)return alert('共有する種目を選択してください');
+ try{await navigator.clipboard.writeText(t);alert('コピーしました。LINEに貼り付けてください。')}catch(e){prompt('文章をコピーしてください',t)}
+};
+document.getElementById('shareNow').onclick=async()=>{
+ const t=shareText();if(!t)return alert('共有する種目を選択してください');
+ if(navigator.share){try{await navigator.share({text:t,title:'TRAINING LAB 記録'})}catch(e){if(e.name!=='AbortError')prompt('共有できない場合はこちらをコピー',t)}}
+ else{try{await navigator.clipboard.writeText(t);alert('コピーしました。LINEに貼り付けてください。')}catch(e){prompt('文章をコピーしてください',t)}}
+};
+
+let calendarYear=0,calendarMonth=0,activeRpeId='';
+const calendarOverlay=document.getElementById('calendarOverlay');
+const rpeOverlay=document.getElementById('rpeOverlay');
+function formatDateJP(v){const [y,m,d]=v.split('-').map(Number);return `${y}/${String(m).padStart(2,'0')}/${String(d).padStart(2,'0')}`}
+function refreshDateButton(){document.getElementById('dateOpen').textContent=formatDateJP(date)+' ▾'}
+function closeCalendar(){calendarOverlay.hidden=true}
+function openCalendar(){const [y,m]=date.split('-').map(Number);calendarYear=y;calendarMonth=m-1;drawCalendar();calendarOverlay.hidden=false}
+function drawCalendar(){
+ document.getElementById('calendarMonth').textContent=`${calendarYear}年 ${calendarMonth+1}月`;
+ const start=new Date(calendarYear,calendarMonth,1).getDay(),days=new Date(calendarYear,calendarMonth+1,0).getDate();
+ let html='';for(let i=0;i<start;i++)html+='<span class="empty"></span>';
+ for(let d=1;d<=days;d++){
+  const v=`${calendarYear}-${String(calendarMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+  html+=`<button type="button" data-calendar-date="${v}" class="${v===date?'current':''} ${v===today()?'today':''}" aria-label="${v}">${d}</button>`;
+ }
+ document.getElementById('calendarGrid').innerHTML=html;
+}
+function setTrainingDate(v){if(!/^\d{4}-\d{2}-\d{2}$/.test(v))return;date=v;expanded='';rpeOpen='';nextView={};refreshDateButton();closeCalendar();render()}
+document.getElementById('dateOpen').onclick=openCalendar;
+document.getElementById('calendarClose').onclick=closeCalendar;
+document.getElementById('calendarPrev').onclick=()=>{const d=new Date(calendarYear,calendarMonth-1,1);calendarYear=d.getFullYear();calendarMonth=d.getMonth();drawCalendar()};
+document.getElementById('calendarNext').onclick=()=>{const d=new Date(calendarYear,calendarMonth+1,1);calendarYear=d.getFullYear();calendarMonth=d.getMonth();drawCalendar()};
+document.getElementById('calendarToday').onclick=()=>setTrainingDate(today());
+document.getElementById('calendarGrid').onclick=e=>{const b=e.target.closest('[data-calendar-date]');if(b)setTrainingDate(b.dataset.calendarDate)};
+calendarOverlay.addEventListener('click',e=>{if(e.target===calendarOverlay)closeCalendar()});
+function closeRpe(){rpeOverlay.hidden=true;activeRpeId=''}
+function openRpe(id){const l=log(id);if(l.finalized)return;activeRpeId=id;document.getElementById('rpeModalGrid').innerHTML=descriptions.map((desc,j)=>`<button type="button" class="${Number(l.rpe)===j+1?'selected':''}" data-modal-rpe="${j+1}"><b>RPE ${j+1}</b><span>${esc(desc)}</span></button>`).join('');rpeOverlay.hidden=false}
+document.getElementById('rpeClose').onclick=closeRpe;
+rpeOverlay.addEventListener('click',e=>{if(e.target===rpeOverlay)closeRpe()});
+document.getElementById('rpeModalGrid').onclick=e=>{const b=e.target.closest('[data-modal-rpe]');if(!b||!activeRpeId)return;const l=log(activeRpeId);if(l.finalized)return closeRpe();l.rpe=Number(b.dataset.modalRpe);l.touched=true;save();closeRpe();render()};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeCalendar();closeRpe()}});
+
+function renderHistory(){const h=state.history.slice(-15).reverse();document.getElementById('history').innerHTML=h.length?h.map(x=>`<div style="padding:7px 0;border-bottom:1px solid #344257">${esc(stamp(x.finishedAt))}・${esc(template(x.id)?.[1]||x.id)}：${fmt(volume(x.sets.filter(s=>s.done)))}kg・RPE ${esc(x.rpe||'未記録')} ${x.next?'→増量':''}</div>`).join(''):'完遂履歴はまだありません。'}
+document.addEventListener('click',e=>{
+ const b=e.target.closest('[data-day],[data-open],[data-complete],[data-reset],[data-next],[data-rpe-toggle],[data-rpe]');if(!b)return;
+ if(b.dataset.day){day=Number(b.dataset.day);expanded='';rpeOpen='';render()}
+ else if(b.dataset.open){expanded=expanded===b.dataset.open?'':b.dataset.open;rpeOpen='';render()}
+ else if(b.dataset.rpeToggle){openRpe(b.dataset.rpeToggle)}
+ else if(b.dataset.rpe){const currentLog=log(b.dataset.rpe);currentLog.rpe=Number(b.dataset.value);currentLog.touched=true;rpeOpen='';save();render()}
+ else if(b.dataset.next){nextView[b.dataset.next]=!nextView[b.dataset.next];render()}
+ else if(b.dataset.complete)complete(b.dataset.complete);
+ else if(b.dataset.reset)reset(b.dataset.reset);
+});
+document.addEventListener('change',e=>{
+ const t=e.target;
+ 
+ if(t.dataset.memo){const l=log(t.dataset.memo);if(!l.finalized){l.notes=t.value;l.touched=true;save()}return}
+ if(t.dataset.edit){const l=log(t.dataset.edit);if(l.finalized)return render();const n=Number(t.value);
+ if(t.value===''||!Number.isFinite(n)||n<0||(t.dataset.field==='r'&&!Number.isInteger(n))){alert('正しい数値を入力してください');return render()}
+ l.sets[Number(t.dataset.index)][t.dataset.field]=n;l.touched=true;save();render()}
+ if(t.dataset.check){const l=log(t.dataset.check);if(l.finalized)return;l.sets[Number(t.dataset.index)].done=t.checked;l.touched=true;save();render()}
+});
+document.getElementById('export').onclick=()=>{const blob=new Blob([JSON.stringify({version:3,data:state},null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='training_lab_v011_backup_'+today()+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
+document.getElementById('importBtn').onclick=()=>document.getElementById('import').click();
+document.getElementById('import').onchange=async e=>{try{const file=e.target.files[0];if(!file)return;const obj=JSON.parse(await file.text());if(obj.version!==3||!obj.data?.plans||!obj.data?.logs||!Array.isArray(obj.data.history))throw Error('v0.3形式ではありません');if(!confirm('現在の記録をバックアップで置き換えますか？'))return;state=obj.data;if(!state.rpe)state.rpe={};
+if(Array.isArray(state.catalog))catalog=state.catalog;save();render()}catch(err){alert('読み込み失敗：'+err.message)}e.target.value=''};
+
+function fillAdmin(){const sel=document.getElementById('adminItem'),old=sel.value;sel.innerHTML=catalog.flatMap(d=>d.groups.flatMap(g=>g.items.map(i=>`<option value="${esc(i[0])}">Day${d.day} ${g.name}｜${esc(i[1])}</option>`))).join('');if(template(old))sel.value=old;drawAdmin()}
+function adminSetRows(){
+ return [...document.querySelectorAll('#adminSets .admin-set')].map(el=>({
+  w:el.querySelector('[data-field="w"]').value,
+  r:el.querySelector('[data-field="r"]').value,
+  target:el.querySelector('[data-field="target"]').value,
+  start:el.querySelector('[data-field="start"]').value
+ }));
+}
+function adminSetMarkup(r,i){
+ return `<div class="admin-set"><div class="set-number">${i+1}セット目</div><div class="admin-set-grid">
+ <label>重量kg<input type="number" min="0" step="any" data-field="w" value="${esc(r.w)}"></label>
+ <label>予定回数<input type="number" min="0" step="1" data-field="r" value="${esc(r.r)}"></label>
+ <label>開始回数<input type="number" min="0" step="1" data-field="start" value="${esc(r.start)}"></label>
+ <label>達成目標<input type="number" min="0" step="1" data-field="target" value="${esc(r.target)}"></label>
+ </div></div>`;
+}
+function paintAdminSets(rows){
+ document.getElementById('adminSets').innerHTML=rows.map(adminSetMarkup).join('');
+ document.getElementById('adminSetCount').textContent=rows.length+'セット';
+}
+function drawAdmin(){
+ const id=document.getElementById('adminItem').value,item=template(id),area=document.getElementById('adminForm');
+ if(!item){area.innerHTML='';return}
+ const p=plan(id),mode=item[5],targets=item[7]||target(item),starts=item[8]||p.map(()=>item[3]);
+ area.innerHTML=`<label>種目名<input id="admName" value="${esc(item[1])}"></label>
+ <div class="adminfield"><label>進行方式<select id="admMode">${['list','step','bench','belt','manual'].map(x=>`<option value="${x}" ${mode===x?'selected':''}>${({list:'重量リスト',step:'一定刻み',bench:'アセンディング',belt:'ベルトSQ連動',manual:'固定・手動'}[x])}</option>`).join('')}</select></label><label>基本開始回数<input id="admMin" type="number" value="${esc(item[3])}"></label></div>
+ <div class="adminfield"><label>基本目標回数<input id="admMax" type="number" value="${esc(item[4])}"></label><label>増量幅<input id="admStep" type="number" step="any" value="${esc(item[10]??(typeof item[6]==='number'?item[6]:2.5))}"></label></div>
+ <label>使用可能重量（カンマ区切り）<textarea id="admList">${Array.isArray(item[9])?item[9].join(', '):(Array.isArray(item[6])?item[6].join(', '):'')}</textarea></label>
+ <p class="hint">セットごとに重量・予定回数・増量後の開始回数・達成目標を設定します。</p>
+ <div class="row"><strong>セット設定</strong><span id="adminSetCount" class="hint"></span></div>
+ <div id="adminSets" class="admin-sets"></div>
+ <div class="actions"><button id="admAddSet">＋セット追加</button><button id="admRemoveSet">最終セット削除</button></div>
+ <div class="actions"><button class="primary" id="admSave">設定を保存</button><button class="reset" id="admDelete">種目削除</button></div>`;
+ paintAdminSets(p.map(([w,r],i)=>({w,r,target:targets[i]??item[4],start:starts[i]??item[3]})));
+}
+function parseNums(v){return v.split(/[,、\s]+/).filter(Boolean).map(Number)}
+function saveAdmin(){
+ const id=document.getElementById('adminItem').value,item=template(id);if(!item)return;
+ const name=document.getElementById('admName').value.trim(),mode=document.getElementById('admMode').value;
+ const min=Number(document.getElementById('admMin').value),max=Number(document.getElementById('admMax').value);
+ const step=Number(document.getElementById('admStep').value),list=parseNums(document.getElementById('admList').value);
+ const inputs=adminSetRows();
+ if(!name||!inputs.length||inputs.some(x=>Object.values(x).some(v=>v.trim()===''))){alert('種目名と各セットの入力を確認してください。');return}
+ const rows=inputs.map(x=>[Number(x.w),Number(x.r)]),targets=inputs.map(x=>Number(x.target)),starts=inputs.map(x=>Number(x.start));
+ if(rows.some(r=>!Number.isFinite(r[0])||r[0]<0||!Number.isInteger(r[1])||r[1]<0)||!Number.isInteger(min)||!Number.isInteger(max)||min<0||max<0||!Number.isFinite(step)||step<=0||[...targets,...starts].some(x=>!Number.isInteger(x)||x<0)){alert('重量・回数・開始回数・達成目標を確認してください。');return}
+ if((mode==='list'&&!list.length)||list.some(x=>!Number.isFinite(x)||x<0)){alert('重量リストを確認してください。');return}
+ const pending=Object.entries(state.logs).some(([k,l])=>k.endsWith('|'+id)&&!l.finalized&&l.sets.some(s=>s.done));
+ if(pending&&!confirm('記録途中のセットがあります。記録途中の内容は保護し、正式な次回予定だけ変更しますか？'))return;
+ item[1]=name;item[3]=min;item[4]=max;item[5]=mode;item[9]=[...new Set(list)].sort((a,b)=>a-b);item[10]=step;item[6]=mode==='list'?item[9]:step;item[7]=targets;item[8]=starts;
+ state.plans[id]=clone(rows);
+ if(save()){alert('設定を保存しました。');render();fillAdmin()}
+}
+document.getElementById('adminToggle').onclick=()=>{adminOpen=!adminOpen;document.getElementById('admin').hidden=!adminOpen;if(adminOpen){fillAdmin();document.getElementById('admin').scrollIntoView({behavior:'smooth'})}};
+document.getElementById('adminItem').onchange=drawAdmin;
+document.getElementById('adminForm').addEventListener('click',e=>{
+ if(e.target.id==='admSave')saveAdmin();
+ if(e.target.id==='admAddSet'){const rows=adminSetRows();rows.push({...rows[rows.length-1]});paintAdminSets(rows)}
+ if(e.target.id==='admRemoveSet'){const rows=adminSetRows();if(rows.length<=1)return;rows.pop();paintAdminSets(rows)}
+ if(e.target.id==='admDelete'){const id=document.getElementById('adminItem').value;if(!confirm('この種目をメニューから削除しますか？履歴は保持します。'))return;for(const d of catalog)for(const g of d.groups)g.items=g.items.filter(i=>i[0]!==id);delete state.plans[id];save();render();fillAdmin()}
+});
+document.getElementById('addItem').onclick=()=>{const name=document.getElementById('addName').value.trim();if(!name)return alert('種目名を入力してください');const d=catalog.find(x=>x.day===Number(document.getElementById('addDay').value)),g=d.groups.find(x=>x.name===document.getElementById('addGroup').value),id='custom_'+Date.now();g.items.push([id,name,[[10,8],[10,8],[10,8]],8,15,'step',2.5,[15,15,15],[8,8,8]]);document.getElementById('addName').value='';save();render();fillAdmin();document.getElementById('adminItem').value=id;drawAdmin()};
+
+refreshDateButton();render();save();
+</script><script>if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));}</script></body></html>
